@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31515.178
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetroFront.Agent", "RetroFront.Agent\RetroFront.Agent.csproj", "{41ABD261-F6E6-4F7A-82E1-DED036CF1F0C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{71A2F9C1-5665-475F-892D-5CAC837AEA6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71A2F9C1-5665-475F-892D-5CAC837AEA6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71A2F9C1-5665-475F-892D-5CAC837AEA6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71A2F9C1-5665-475F-892D-5CAC837AEA6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99B1F8ED-4700-4A4A-A878-B7F727FBD9AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99B1F8ED-4700-4A4A-A878-B7F727FBD9AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99B1F8ED-4700-4A4A-A878-B7F727FBD9AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99B1F8ED-4700-4A4A-A878-B7F727FBD9AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41ABD261-F6E6-4F7A-82E1-DED036CF1F0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41ABD261-F6E6-4F7A-82E1-DED036CF1F0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41ABD261-F6E6-4F7A-82E1-DED036CF1F0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41ABD261-F6E6-4F7A-82E1-DED036CF1F0C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4A237DAB-CC96-468D-963F-31A4986D1E9E}
+	EndGlobalSection
+EndGlobal
