@@ -41,16 +41,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AgentSplashScreen.cs">
+    <Compile Include="Extensions\ExtensionAttribute.cs" />
+    <Compile Include="Extensions\ListExtensions.cs" />
+    <Compile Include="Extensions\FontExtensions.cs" />
+    <Compile Include="Extensions\PointExtensions.cs" />
+    <Compile Include="Screens\AgentSplashScreen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AgentSplashScreen.Designer.cs">
+    <Compile Include="Screens\AgentSplashScreen.Designer.cs">
       <DependentUpon>AgentSplashScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="NetworkUtils.cs" />
+    <Compile Include="Server\AgentServer.cs" />
+    <Compile Include="Server\ClientHandler.cs" />
+    <Compile Include="Utils\NetworkUtils.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="AgentSplashScreen.resx">
+    <EmbeddedResource Include="Screens\AgentSplashScreen.resx">
       <DependentUpon>AgentSplashScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -72,6 +78,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RetroFront.Agent.Common\RetroFront.Agent.Common.csproj">
+      <Project>{47a1ebf7-3e35-4115-8ce1-c740d6fdc155}</Project>
+      <Name>RetroFront.Agent.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

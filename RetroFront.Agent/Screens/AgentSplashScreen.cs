@@ -1,15 +1,22 @@
 ﻿using System;
-using System.Drawing;
-using System.Net.NetworkInformation;
 using System.Windows.Forms;
 
-namespace RetroFront.Agent
+using RetroFront.Agent.Extensions;
+using RetroFront.Agent.Server;
+
+namespace RetroFront.Agent.Screens
 {
   public partial class AgentSplashScreen : Form
   {
-    public AgentSplashScreen()
+    private readonly AgentServer _agentServer;
+    private readonly NetworkUtils _networkUtils;
+
+    public AgentSplashScreen(AgentServer agentServer, NetworkUtils networkUtils)
     {
       InitializeComponent();
+
+      _agentServer = agentServer;
+      _networkUtils = networkUtils;
     }
 
     private void AgentSplashScreen_Load(object sender, EventArgs e)
@@ -18,6 +25,8 @@ namespace RetroFront.Agent
 
       InitHeader();
       InitBody();
+
+      _agentServer.Start();
     }
 
     private void GoFullscreen()
@@ -29,24 +38,24 @@ namespace RetroFront.Agent
 
     private void InitHeader()
     {
-      _banner.Location = new Point(_banner.Location.X, Height / 5);
+      _banner.Location = _banner.Location.CloneWithNewY(Height / 5);
       _banner.Width = Width;
       _banner.Height = Height / 7;
 
       var headerFontSize = Width * 0.05;
 
-      _header.Font = new Font(_header.Font.FontFamily, (float)headerFontSize, _header.Font.Style);
+      _header.Font = _header.Font.CloneWithNewSize(headerFontSize);
     }
 
     private void InitBody()
     {
-      _ipAddress.Location = new Point(_ipAddress.Location.X, (int)(Height * 0.4));
-      _prompt.Location = new Point(_prompt.Location.X, (int)(Height * 0.65));
+      _ipAddress.Location = _ipAddress.Location.CloneWithNewY(Height * 0.4);
+      _prompt.Location = _prompt.Location.CloneWithNewY(Height * 0.65);
 
       var paragraphFontSize = Width * 0.03;
 
-      _ipAddress.Font = new Font(_ipAddress.Font.FontFamily, (float)paragraphFontSize, _ipAddress.Font.Style);
-      _prompt.Font = new Font(_header.Font.FontFamily, (float)paragraphFontSize, _prompt.Font.Style);
+      _ipAddress.Font = _ipAddress.Font.CloneWithNewSize(paragraphFontSize);
+      _prompt.Font = _prompt.Font.CloneWithNewSize(paragraphFontSize);
 
       SetIpAddress();
     }
@@ -56,7 +65,7 @@ namespace RetroFront.Agent
       _ipAddress.Text = string.Format(
         "{0} {1}",
         _ipAddress.Text,
-        NetworkUtils.GetLocalIPv4(NetworkInterfaceType.Ethernet)
+        _networkUtils.GetLocalEthernetIPv4Address()
       );
     }
 
