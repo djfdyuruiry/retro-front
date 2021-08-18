@@ -33,10 +33,11 @@ namespace RetroFront.Agent.Server
       );
 
       _listener.Start();
-      _serverUp = true;
 
       _loopThread = new Thread(ServerLoop);
       _loopThread.Start();
+
+      _serverUp = true;
     }
 
     public void Stop()

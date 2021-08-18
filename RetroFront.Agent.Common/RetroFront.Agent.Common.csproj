@@ -36,7 +36,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExtensionAttribute.cs" />
+    <Compile Include="Extensions\ExtensionAttribute.cs" />
     <Compile Include="Extensions\ListExtensions.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="MessageBuilder.cs" />
@@ -44,6 +44,9 @@
     <Compile Include="MessageTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions\StreamReaderExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".editorconfig" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

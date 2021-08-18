@@ -11,6 +11,8 @@ namespace RetroFront.Agent.Server
 {
   public class ClientHandler
   {
+    private static readonly int PROCESS_START_TIMEOUT_IN_MS = 3000;
+
     private readonly MessageBuilder _messageBuilder;
 
     public ClientHandler(MessageBuilder messageBuilder)
@@ -71,35 +73,9 @@ namespace RetroFront.Agent.Server
 
       var args = message.RawData.GetOrDefault(2, string.Empty);
 
-      return StartProcess(processPath, args);
-    }
-
-    private Message StartProcess(string processPath, string args)
-    {
       try
       {
-        var process = Process.Start(
-          new ProcessStartInfo
-          {
-            FileName = processPath,
-            Arguments = args
-          }
-        );
-
-        Thread.Sleep(5000);
-
-        if (process.HasExited)
-        {
-          return _messageBuilder.BuildError(
-          string.Format(
-            "Process @ path '{0}' exited shortly after it started, exit code: {1}",
-            processPath,
-            process.ExitCode
-          )
-          );
-        }
-
-        return _messageBuilder.Build(Responses.Ok);
+        return StartProcess(processPath, args);
       }
       catch (Exception ex)
       {
@@ -111,6 +87,32 @@ namespace RetroFront.Agent.Server
           )
         );
       }
+    }
+
+    private Message StartProcess(string processPath, string args)
+    {
+      var process = Process.Start(
+        new ProcessStartInfo
+        {
+          FileName = processPath,
+          Arguments = args
+        }
+      );
+
+      Thread.Sleep(PROCESS_START_TIMEOUT_IN_MS);
+
+      if (process.HasExited)
+      {
+        return _messageBuilder.BuildError(
+          string.Format(
+            "Process @ path '{0}' exited shortly after it started, exit code: {1}",
+            processPath,
+            process.ExitCode
+          )
+        );
+      }
+
+      return _messageBuilder.Build(Responses.Ok);
     }
   }
 }
