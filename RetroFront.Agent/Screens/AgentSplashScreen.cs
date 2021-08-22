@@ -19,6 +19,7 @@ namespace RetroFront.Agent.Screens
       _networkUtils = networkUtils;
     }
 
+    #region EventHandlers
     private void AgentSplashScreen_Load(object sender, EventArgs e)
     {
       GoFullscreen();
@@ -28,6 +29,20 @@ namespace RetroFront.Agent.Screens
 
       _agentServer.Start();
     }
+
+    private void AgentSplashScreen_KeyDown(object _, KeyEventArgs e)
+    {
+      if (e.KeyCode == Keys.Escape)
+      {
+        Close();
+      }
+    }
+
+    private void AgentSplashScreen_FormClosing(object sender, FormClosingEventArgs e)
+    {
+      _agentServer.Stop();
+    }
+    #endregion
 
     private void GoFullscreen()
     {
@@ -67,14 +82,6 @@ namespace RetroFront.Agent.Screens
         _ipAddress.Text,
         _networkUtils.GetLocalEthernetIPv4Address()
       );
-    }
-
-    private void AgentSplashScreen_KeyDown(object sender, KeyEventArgs e)
-    {
-      if (e.KeyCode == Keys.Escape)
-      {
-        Close();
-      }
     }
   }
 }

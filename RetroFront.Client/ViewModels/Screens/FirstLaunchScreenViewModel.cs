@@ -1,5 +1,4 @@
-﻿using System.IO;
-using System.Net;
+﻿using System.Net;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -14,7 +13,6 @@ namespace RetroFront.Client.ViewModels.Screens
   {
     private const uint MAX_TCP_PORT = 65535;
 
-    private readonly IApplicationManager _appManager;
     private readonly IAgentEndpointProvider _agentEndpointProvider;
     private readonly IAgentTcpClient _agentClient;
 
@@ -53,12 +51,10 @@ namespace RetroFront.Client.ViewModels.Screens
     }
 
     public FirstLaunchScreenViewModel(
-      IApplicationManager appManager,
       IAgentEndpointProvider agentEndpointProvider,
       IAgentTcpClient agentClient
     )
     {
-      _appManager = appManager;
       _agentEndpointProvider = agentEndpointProvider;
       _agentClient = agentClient;
 
@@ -69,29 +65,8 @@ namespace RetroFront.Client.ViewModels.Screens
 
     public async Task OpenNotepad(DependencyObject view)
     {
-      if (!AgentEndpointIsValid())
+      if (!IsViewModelStateValid(Window.GetWindow(view)))
       {
-        MessageBox.Show(
-          Window.GetWindow(view), 
-          "Agent endpoint entered is invalid, check IP and port are correct",
-          "RetroFront",
-          MessageBoxButton.OK, 
-          MessageBoxImage.Error
-        );
-
-        return;
-      }
-
-      if (string.IsNullOrEmpty(ProgramPath))
-      {
-        MessageBox.Show(
-          Window.GetWindow(view),
-          "Program path entered is blank",
-          "RetroFront",
-          MessageBoxButton.OK,
-          MessageBoxImage.Error
-        );
-
         return;
       }
 
@@ -101,6 +76,37 @@ namespace RetroFront.Client.ViewModels.Screens
       );
 
       await _agentClient.StartProgram(ProgramPath);
+    }
+
+    private bool IsViewModelStateValid(Window view)
+    {
+      if (!AgentEndpointIsValid())
+      {
+        MessageBox.Show(
+          view,
+          "Agent endpoint entered is invalid, check IP and port are correct",
+          "RetroFront",
+          MessageBoxButton.OK,
+          MessageBoxImage.Error
+        );
+
+        return false;
+      }
+
+      if (string.IsNullOrEmpty(ProgramPath))
+      {
+        MessageBox.Show(
+          view,
+          "Program path entered is blank",
+          "RetroFront",
+          MessageBoxButton.OK,
+          MessageBoxImage.Error
+        );
+
+        return false;
+      }
+
+      return true;
     }
 
     private bool AgentEndpointIsValid() => 

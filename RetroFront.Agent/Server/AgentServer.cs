@@ -11,7 +11,6 @@ namespace RetroFront.Agent.Server
     private readonly uint _portToListenOn;
 
     private TcpListener _listener;
-    private bool _serverUp;
     private Thread _loopThread;
 
     public AgentServer(
@@ -36,26 +35,25 @@ namespace RetroFront.Agent.Server
 
       _loopThread = new Thread(ServerLoop);
       _loopThread.Start();
-
-      _serverUp = true;
     }
 
     public void Stop()
     {
-      _serverUp = false;
-
       if (_loopThread is null)
       {
         return;
       }
 
-      _loopThread.Join(TimeSpan.FromSeconds(5));
+      _loopThread.Abort();
+      _listener.Stop();
+
+      _listener = null;
       _loopThread = null;
     }
 
     private void ServerLoop()
     {
-      while (_serverUp)
+      while (true)
       {
         try
         {
@@ -68,9 +66,6 @@ namespace RetroFront.Agent.Server
           );
         }
       }
-
-      _listener.Stop();
-      _listener = null;
     }
   }
 }
