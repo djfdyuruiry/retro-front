@@ -3,10 +3,37 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:RetroFront.Client.Views.Screens"
         mc:Ignorable="d"
-        Title="FirstLaunchScreenView" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="FirstLaunchScreenView"
+        Background="White"
+        Width="320"
+        Height="240">
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="1*" />
+    </Grid.ColumnDefinitions>
+
+    <Grid.RowDefinitions>
+      <RowDefinition Height="0.1*"/>
+      <RowDefinition Height="0.2*"/>
+      <RowDefinition Height="0.2*"/>
+      <RowDefinition Height="0.2*"/>
+      <RowDefinition Height="0.1*"/>
+      <RowDefinition Height="0.1*"/>
+    </Grid.RowDefinitions>
+
+    <GroupBox Grid.Row="1" Grid.Column="0" Header="IP">
+      <TextBox x:Name="AgentIp" />
+    </GroupBox>
+
+    <GroupBox Grid.Row="2" Grid.Column="0" Header="Port">
+      <TextBox x:Name="AgentPort"/>
+    </GroupBox>
+
+    <GroupBox Grid.Row="3" Grid.Column="0" Header="Program Path">
+      <TextBox x:Name="ProgramPath"/>
+    </GroupBox>
+
+    <Button Grid.Row="4" Grid.Column="0" x:Name="OpenNotepad" Content="Open notepad"/>
+  </Grid>
 </Window>
