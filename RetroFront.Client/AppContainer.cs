@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Caliburn.Micro;
-using RetroFront.Client.Extensions;
 using SimpleInjector;
+
+using RetroFront.Agent.Common;
+using RetroFront.Client.Extensions;
 
 namespace RetroFront.Client
 {
@@ -32,11 +34,14 @@ namespace RetroFront.Client
       RegisterSingleton<IWindowManager, WindowManager>();
       RegisterSingleton<IEventAggregator, EventAggregator>();
 
+      RegisterCommonProject();
+
       RegisterUtils();
       RegisterViewModels();
 
       Verify();
     }
+
 
     private void RegisterUtils() =>
       GetInterfaceMappings(
@@ -76,5 +81,8 @@ namespace RetroFront.Client
           ).FirstOrDefault()
         );
     }
+
+    private void RegisterCommonProject() =>
+      RegisterInstance(new MessageBuilder());
   }
 }

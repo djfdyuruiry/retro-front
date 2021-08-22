@@ -32,4 +32,8 @@
   <ItemGroup>
     <Folder Include="Resources\" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RetroFront.Agent.Common\RetroFront.Agent.Common.csproj" />
+  </ItemGroup>
 </Project>
